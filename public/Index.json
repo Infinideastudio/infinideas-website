@@ -1,0 +1,48 @@
+{
+  "Main": {
+    "Lines": [
+      "虽然总是经历波折",
+      "我们仍将继续",
+      "让创意和梦想",
+      "创造奇迹",
+      "……",
+      "欢迎来到新创无际的网站"
+    ]
+  },
+  "Sections": [
+    {
+      "Description": "明天的曙光 ——",
+      "Primary": {
+        "Internal": "false",
+        "Text": "Myomyw",
+        "Address": "/myomyw/index.html"
+      },
+      "Comments": [
+        "一个挺有意思的小游戏，在逻辑僵局中迫使对手让你赢"
+      ],
+      "Links": [
+        {
+          "Internal": "false",
+          "Text": "Myomyw on GitHub",
+          "Address": "https://www.github.com/Infinideastudio/Myomyw"
+        },
+        {
+          "Internal": "false",
+          "Text": "安卓版下载",
+          "Address": "https://www.taptap.com/app/39792"
+        }
+      ]
+    },
+    {
+      "Description": "Good Time ——",
+      "Primary": {
+        "Text": "美好的时光",
+        "Address": "/MCServer"
+      },
+      "Comments": [
+        "这是我们目前开放着的，“我的世界”服务器的列表。欢迎您前往游玩……"
+      ],
+      "Links": []
+    }
+  ]
+}

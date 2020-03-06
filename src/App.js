@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import IndexPage from './pages/IndexPage';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const getBasename = () => {
+  return `/${process.env.PUBLIC_URL.split('/').pop()}`;
+};
+
+const PageContainer = styled.div`
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 10em;
+`;
+
+class App extends React.Component {
+  render() {
+    return (
+        <BrowserRouter basename={getBasename()}>
+            <PageContainer>
+            <Header />
+            <Switch>
+                <Route path="/:page">
+                    <IndexPage />
+                </Route>
+                <Route>
+                    <IndexPage />
+                </Route>
+            </Switch>
+            <Footer />
+            </PageContainer>
+        </BrowserRouter>
+    );
+  }
 }
 
 export default App;
