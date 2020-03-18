@@ -2,6 +2,7 @@ import React from 'react';
 import ContentBox from "../components/ContentBox";
 import Section from "../components/Section";
 import { withRouter } from "react-router-dom";
+import {API_BASE} from "../Settings";
 
 class IndexPage extends React.Component {
     constructor(props) {
@@ -12,14 +13,17 @@ class IndexPage extends React.Component {
     }
 
     componentDidMount() {
-        const pageName = this.props.match.params["page"] ? this.props.match.params["page"] : "Index";
+        const pageName = this.props.location.pathname !== "/" ? encodeURIComponent(this.props.location.pathname.substr(1)) : "index";
         const _this = this;
-        fetch(pageName+".json")
+        const requestPath = API_BASE + "/static" + (isNaN(pageName)? "/name/" + pageName : "/id/" + (+pageName));
+
+        fetch(requestPath)
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
-                _this.setState({data: data});
+                console.log(data[0]["content"]);
+                _this.setState({data: JSON.parse(data[0]["content"])});
             })
             .catch(()=>{
                 _this.setState({data: {"Main":{"Lines":["Page \""+pageName+"\" not found"]}, "Sections":[]}});
@@ -27,8 +31,8 @@ class IndexPage extends React.Component {
     }
 
     arrayToHtml(arr){
-        return arr.map((value) => {
-            return <p>{value}</p>
+        return arr.map((value, i) => {
+            return <p key={i}>{value}</p>
         });
     }
 
