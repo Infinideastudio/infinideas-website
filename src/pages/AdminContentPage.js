@@ -42,23 +42,38 @@ class AdminContentPage extends React.Component {
                 <p>
                     <button onClick={this.submitChanges}>Submit</button>
                     <button onClick={this.deleteContent}>Delete</button>
+                    <button onClick={this.returnToAdminPage}>Cancel</button>
                 </p>
             </div>
         );
     }
 
+    returnToAdminPage() {
+        this.props.history.push("/admin/");
+    }
+
     deleteContent() {
-        fetch(API_BASE + "/doc/id/" + this.getPageId())
-            .then((response) => {
-                this.props.history.push("/admin/");
-            });
+        let init = {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + new Cookies().get("credential")
+            }
+        };
+        fetch(API_BASE + "/doc/id/" + this.getPageId(), init)
+            .then((response) => {this.returnToAdminPage()});
     }
 
     submitChanges() {
-        fetch(API_BASE + "/doc/id/" + this.getPageId())
-            .then((response) => {
-                this.props.history.push("/admin/");
-            });
+        let init = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + new Cookies().get("credential")
+            },
+            body: JSON.stringify(this.state.data)
+        };
+        fetch(API_BASE + "/doc/id/" + this.getPageId(), init)
+            .then((response) => {this.returnToAdminPage()});
     }
 }
 
