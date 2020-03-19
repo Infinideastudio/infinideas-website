@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import IndexPage from './pages/IndexPage';
+import IndexPage from './pages/ContentPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import LoginPage from "./pages/LoginPage";

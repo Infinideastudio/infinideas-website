@@ -41,6 +41,7 @@ class AdminContentPage extends AuthenticatedPage {
                     <button onClick={this.submitChanges.bind(this)}>Submit</button>
                     <button onClick={this.deleteContent.bind(this)}>Delete</button>
                     <button onClick={this.returnToAdminPage.bind(this)}>Cancel</button>
+                    <a href={"/"+this.getPageId()}>Goto that page</a>
                 </p>
             </div>
         );
@@ -63,7 +64,7 @@ class AdminContentPage extends AuthenticatedPage {
         fetch(API_BASE + "/doc/id/" + this.getPageId(), {
             method: 'PUT',
             headers: this.getRequestHeader(),
-            body: JSON.stringify(this.state.data)
+            body: JSON.stringify(JSON.stringify(JSON.parse(this.state.data)))
         }).then((response) => {
             this.returnToAdminPage();
         });

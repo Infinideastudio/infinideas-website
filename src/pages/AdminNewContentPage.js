@@ -35,12 +35,12 @@ class AdminNewContentPage extends AuthenticatedPage {
             alert("The page name can't be empty");
             return;
         }
-        fetch(API_BASE + "/doc/name/" + this.state.pageName, {
+        fetch(API_BASE + "/doc/name/" + encodeURIComponent(this.state.pageName), {
             method: 'POST',
             headers: this.getRequestHeader(),
-            body: JSON.stringify(this.state.data)
+            body: JSON.stringify(JSON.stringify(JSON.parse(this.state.data)))
         }).then((response) => {
-            this.returnToAdminPage();
+            this.props.history.push("/" + this.state.pageName);
         });
     }
 }

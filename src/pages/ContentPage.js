@@ -4,7 +4,7 @@ import Section from "../components/Section";
 import { withRouter } from "react-router-dom";
 import {API_BASE} from "../Settings";
 
-class IndexPage extends React.Component {
+class ContentPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,10 +21,11 @@ class IndexPage extends React.Component {
                 return response.json();
             })
             .then((data) => {
-                console.log(data[0]["content"]);
-                this.setState({data: JSON.parse(data[0]["content"])});
+                if(Array.isArray(data)) data = data[0];
+                this.setState({data: JSON.parse(data["content"])});
             })
-            .catch(()=>{
+            .catch((err)=>{
+                console.error(err);
                 this.setState({data: {"Main":{"Lines":["Page \""+pageName+"\" not found"]}, "Sections":[]}});
             });
     }
@@ -43,13 +44,13 @@ class IndexPage extends React.Component {
                     {this.arrayToHtml(this.state.data["Main"]["Lines"])}
                 </ContentBox>
 
-                {this.state.data["Sections"].map((value) => {
+                {this.state.data["Sections"].map((value, i) => {
                     return (
-                    <Section name={value["Primary"]["Text"]} link={value["Primary"]["Address"]} description={value["Description"]}>
+                    <Section key={i} name={value["Primary"]["Text"]} link={value["Primary"]["Address"]} description={value["Description"]}>
                         {this.arrayToHtml(value["Comments"])}
                         {
-                            value["Links"].map((link) => {
-                                return <a target="_blank" rel="noopener noreferrer" href={link["Address"]}>{link["Text"]}</a>
+                            value["Links"].map((link, j) => {
+                                return <a key={j} target="_blank" rel="noopener noreferrer" href={link["Address"]}>{link["Text"]}</a>
                             })
                         }
                     </Section>);
@@ -60,4 +61,4 @@ class IndexPage extends React.Component {
     }
 }
 
-export default withRouter(IndexPage);
+export default withRouter(ContentPage);
