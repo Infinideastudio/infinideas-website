@@ -15,7 +15,7 @@ class IndexPage extends React.Component {
     componentDidMount() {
         const pageName = this.props.location.pathname !== "/" ? encodeURIComponent(this.props.location.pathname.substr(1)) : "index";
         const _this = this;
-        const requestPath = API_BASE + "/static" + (isNaN(pageName)? "/name/" + pageName : "/id/" + (+pageName));
+        const requestPath = API_BASE + "/doc" + (isNaN(pageName)? "/name/" + pageName : "/id/" + (+pageName));
 
         fetch(requestPath)
             .then((response) => {

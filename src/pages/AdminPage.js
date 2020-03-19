@@ -17,7 +17,7 @@ class AdminPage extends React.Component {
 
     componentDidMount() {
         const _this = this;
-        fetch(API_BASE + "/static/list", {
+        fetch(API_BASE + "/doc/list", {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',

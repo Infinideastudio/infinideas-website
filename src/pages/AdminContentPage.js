@@ -21,7 +21,7 @@ class AdminContentPage extends React.Component {
 
     componentDidMount() {
         const _this = this;
-        fetch(API_BASE + "/static/id/" + this.getPageId())
+        fetch(API_BASE + "/doc/id/" + this.getPageId())
             .then((response) => {
                 return response.json();
             })
@@ -48,14 +48,14 @@ class AdminContentPage extends React.Component {
     }
 
     deleteContent() {
-        fetch(API_BASE + "/static/id/" + this.getPageId())
+        fetch(API_BASE + "/doc/id/" + this.getPageId())
             .then((response) => {
                 this.props.history.push("/admin/");
             });
     }
 
     submitChanges() {
-        fetch(API_BASE + "/static/id/" + this.getPageId())
+        fetch(API_BASE + "/doc/id/" + this.getPageId())
             .then((response) => {
                 this.props.history.push("/admin/");
             });
