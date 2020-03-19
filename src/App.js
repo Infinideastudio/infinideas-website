@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from "styled-components";
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import IndexPage from './pages/IndexPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/AdminPage";
 import AdminContentPage from "./pages/AdminContentPage";
+import AdminNewContentPage from "./pages/AdminNewContentPage";
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -27,6 +28,9 @@ class App extends React.Component {
             <Switch>
                 <Route path="/login">
                     <LoginPage />
+                </Route>
+                <Route path="/admin/new">
+                    <AdminNewContentPage />
                 </Route>
                 <Route path="/admin/:page">
                     <AdminContentPage />

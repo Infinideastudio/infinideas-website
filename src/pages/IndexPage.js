@@ -14,7 +14,6 @@ class IndexPage extends React.Component {
 
     componentDidMount() {
         const pageName = this.props.location.pathname !== "/" ? encodeURIComponent(this.props.location.pathname.substr(1)) : "index";
-        const _this = this;
         const requestPath = API_BASE + "/doc" + (isNaN(pageName)? "/name/" + pageName : "/id/" + (+pageName));
 
         fetch(requestPath)
@@ -23,10 +22,10 @@ class IndexPage extends React.Component {
             })
             .then((data) => {
                 console.log(data[0]["content"]);
-                _this.setState({data: JSON.parse(data[0]["content"])});
+                this.setState({data: JSON.parse(data[0]["content"])});
             })
             .catch(()=>{
-                _this.setState({data: {"Main":{"Lines":["Page \""+pageName+"\" not found"]}, "Sections":[]}});
+                this.setState({data: {"Main":{"Lines":["Page \""+pageName+"\" not found"]}, "Sections":[]}});
             });
     }
 

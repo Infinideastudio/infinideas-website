@@ -1,18 +1,14 @@
 import React from 'react';
-import ContentBox from "../components/ContentBox";
-import Section from "../components/Section";
 import {withRouter} from "react-router-dom";
-import Cookies from "universal-cookie";
 import {API_BASE} from "../Settings";
+import AuthenticatedPage from "../components/AuthenticatedPage";
 
-class AdminContentPage extends React.Component {
+class AdminContentPage extends AuthenticatedPage {
     constructor(props) {
         super(props);
         this.state = {
             data: "Loading..."
         };
-        if (new Cookies().get("credential") === undefined)
-            this.props.history.push("/login");
     }
 
     getPageId(){
@@ -20,16 +16,18 @@ class AdminContentPage extends React.Component {
     }
 
     componentDidMount() {
-        const _this = this;
+        if(isNaN(this.getPageId())) this.returnToAdminPage();
+
         fetch(API_BASE + "/doc/id/" + this.getPageId())
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
-                _this.setState({data: JSON.stringify(JSON.parse(data["content"]), null, 4)});
+                this.setState({data: JSON.stringify(JSON.parse(data["content"]), null, 4)});
             })
             .catch(() => {
-                _this.setState({data: "Page " + this.getPageId() + " not found"});
+                this.setState({data: "Page " + this.getPageId() + " not found"});
+                this.returnToAdminPage();
             });
     }
 
@@ -40,9 +38,9 @@ class AdminContentPage extends React.Component {
                           value={this.state.data}
                           onChange={(e)=>{this.setState({data: e.target.value})}} />
                 <p>
-                    <button onClick={this.submitChanges}>Submit</button>
-                    <button onClick={this.deleteContent}>Delete</button>
-                    <button onClick={this.returnToAdminPage}>Cancel</button>
+                    <button onClick={this.submitChanges.bind(this)}>Submit</button>
+                    <button onClick={this.deleteContent.bind(this)}>Delete</button>
+                    <button onClick={this.returnToAdminPage.bind(this)}>Cancel</button>
                 </p>
             </div>
         );
@@ -53,27 +51,22 @@ class AdminContentPage extends React.Component {
     }
 
     deleteContent() {
-        let init = {
+        fetch(API_BASE + "/doc/id/" + this.getPageId(), {
             method: 'DELETE',
-            headers: {
-                'Authorization': 'Bearer ' + new Cookies().get("credential")
-            }
-        };
-        fetch(API_BASE + "/doc/id/" + this.getPageId(), init)
-            .then((response) => {this.returnToAdminPage()});
+            headers: this.getRequestHeader(),
+        }).then((response) => {
+            this.returnToAdminPage();
+        });
     }
 
     submitChanges() {
-        let init = {
+        fetch(API_BASE + "/doc/id/" + this.getPageId(), {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + new Cookies().get("credential")
-            },
+            headers: this.getRequestHeader(),
             body: JSON.stringify(this.state.data)
-        };
-        fetch(API_BASE + "/doc/id/" + this.getPageId(), init)
-            .then((response) => {this.returnToAdminPage()});
+        }).then((response) => {
+            this.returnToAdminPage();
+        });
     }
 }
 
