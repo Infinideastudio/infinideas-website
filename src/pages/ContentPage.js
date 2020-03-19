@@ -31,6 +31,7 @@ class ContentPage extends React.Component {
     }
 
     arrayToHtml(arr){
+        if(!arr) return (<p/>)
         return arr.map((value, i) => {
             return <p key={i}>{value}</p>
         });
@@ -44,7 +45,9 @@ class ContentPage extends React.Component {
                     {this.arrayToHtml(this.state.data["Main"]["Lines"])}
                 </ContentBox>
 
-                {this.state.data["Sections"].map((value, i) => {
+                {
+                    this.state.data["Sections"]?
+                        (this.state.data["Sections"].map((value, i) => {
                     return (
                     <Section key={i} name={value["Primary"]["Text"]} link={value["Primary"]["Address"]} description={value["Description"]}>
                         {this.arrayToHtml(value["Comments"])}
@@ -53,8 +56,7 @@ class ContentPage extends React.Component {
                                 return <a key={j} target="_blank" rel="noopener noreferrer" href={link["Address"]}>{link["Text"]}</a>
                             })
                         }
-                    </Section>);
-                })
+                    </Section>);})):(<div/>)
                 }
             </div>
         );
