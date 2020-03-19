@@ -13,6 +13,9 @@ const Links = styled.div`
     background-color: #cccccc;
     width: 100%;
     padding: 1em 16em;
+    @media (max-width: 600px) {
+        padding: 1em 2em;
+    }
     box-sizing: border-box;
     font-size: 12px;
     
@@ -30,6 +33,9 @@ const CopyrightInfo = styled.div`
     height: 4em;
     width: 100%;
     padding: 1em 16em;
+    @media (max-width: 600px) {
+        padding: 1em 2em;
+    }
     box-sizing: border-box;
     color: #EEE;
     font-size: 12px;
