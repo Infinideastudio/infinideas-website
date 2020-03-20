@@ -34,7 +34,7 @@ class AdminPage extends AuthenticatedPage {
                 <p><a href={"/admin/new"}>* New Page *</a></p>
                 {
                     this.state.data.map((value, i) => {
-                        return (<p key={i}><a href={"/admin/"+value.id}>{value.id+": "+value.name}</a></p>);
+                        return (<p key={i}><a href={"/admin/"+value.id}>{value.id+": "+value.name.replace("$", "/")}</a></p>);
                     })
                 }
             </div>

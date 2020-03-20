@@ -13,8 +13,8 @@ class ContentPage extends React.Component {
     }
 
     componentDidMount() {
-        const pageName = this.props.location.pathname !== "/" ? encodeURIComponent(this.props.location.pathname.substr(1)) : "index";
-        const requestPath = API_BASE + "/doc" + (isNaN(pageName)? "/name/" + pageName : "/id/" + (+pageName));
+        const pageName = this.props.location.pathname !== "/" ? this.props.location.pathname.substr(1) : "index";
+        const requestPath = API_BASE + "/doc" + (isNaN(pageName)? "/name/" + pageName.replace("/", "$") : "/id/" + (+pageName));
 
         fetch(requestPath)
             .then((response) => {
@@ -31,7 +31,7 @@ class ContentPage extends React.Component {
     }
 
     arrayToHtml(arr){
-        if(!arr) return (<p/>)
+        if(!arr) return (<p/>);
         return arr.map((value, i) => {
             return <p key={i}>{value}</p>
         });
