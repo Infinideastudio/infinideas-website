@@ -33,7 +33,7 @@ class ContentPage extends React.Component {
     arrayToHtml(arr){
         if(!arr) return (<p/>);
         return arr.map((value, i) => {
-            return <p key={i}>{value}</p>
+            return <p key={i} dangerouslySetInnerHTML={{__html: value}}/>
         });
     }
 
