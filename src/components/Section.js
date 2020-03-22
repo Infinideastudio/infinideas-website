@@ -2,7 +2,6 @@ import React from 'react';
 import styled from "styled-components";
 
 const StyledSection = styled.div`
-    margin: 50px 20%;
     padding: 20px;
     font-size: 12px;
     border-right: 2px solid #80ccff;
@@ -16,13 +15,11 @@ const StyledSection = styled.div`
         font-size: 16px;
     }
     
-    &:hover {
-        background-color: #aedfff;
-    }
+    &:hover { background-color: #aedfff; }
     
     a {
         margin-right: 10px;
-        font-size: 14px;
+        font-size: 14px
     }
     
     .link {
@@ -35,16 +32,16 @@ const StyledSection = styled.div`
     }
     
     .link a {
-        font-size: 64px;
-        
-        &:hover {
-            color: #0099ff;
-        }
-        
-        @media (max-width: 600px) {
-            & { font-size: 32px }
-        }
+        &:hover { color: #0099ff; }
+        @media (min-width: 800px) { & { font-size: 64px } }
+        @media (max-width: 800px) { & { font-size: 48px } }
+        @media (max-width: 600px) { & { font-size: 32px } }
     }
+    
+    @media screen and (min-width: 1000px) { margin: 50px 20%; }
+    @media screen and (max-width: 1000px) { margin: 40px 10%; } 
+    @media screen and (max-width: 800px) { margin: 20px 15px; }
+    @media screen and (max-width: 600px) { margin: 10px 10px; }
 `;
 
 const Section = (props) => {
