@@ -32,6 +32,13 @@ const Links = styled.div`
 
 const CopyrightInfo = styled.div`
     height: 4em;
+    a {
+        color: #ffffff;
+        margin-right: 0.5em;
+        &:hover {
+            background-color: #999999;
+        }
+    }
     @media screen and (min-width: 800px) {
         width: 100%;
         padding: 1em 16em;
@@ -60,13 +67,12 @@ const Footer = (props) => {
             <Links>
                 <span>友情链接</span>
                 <a target="_blank" rel="noopener noreferrer" href="http://www.snang.cc/">山岚幽阳</a>
-                <a target="_blank" rel="noopener noreferrer" href="http://x-y.studio/">平衍之域</a>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.skyju.cc/">居正网站</a>
-                <a target="_blank" rel="noopener noreferrer" href="http://ptree.top/">淀粉月刊</a>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.boulkoo.com/">BOULKOO</a>
             </Links>
             <CopyrightInfo>
-                <div className="left">© INFINIDEAS 2015 - {year}</div>
+                <div className="left">
+                    <span>© INFINIDEAS 2015 - {year} </span>
+                    <a target="_blank" rel="noopener noreferrer" href="http://www.beian.miit.gov.cn/">沪ICP备20008795号</a>
+                </div>
                 <div className="right">Site content under CC BY-SA 3.0 Unported.</div>
             </CopyrightInfo>
         </StyledFooter>

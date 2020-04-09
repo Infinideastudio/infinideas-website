@@ -44,7 +44,6 @@ class ContentPage extends React.Component {
                 <ContentBox>
                     {this.arrayToHtml(this.state.data["Main"]["Lines"])}
                 </ContentBox>
-
                 {
                     this.state.data["Sections"]?
                         (this.state.data["Sections"].map((value, i) => {

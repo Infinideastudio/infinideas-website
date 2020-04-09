@@ -24,7 +24,7 @@ const ContentBox = styled.div`
     @media screen and (max-width: 800px) {
         font-size: 16px;
         line-height: 36px;
-        width: 100%;
+        width: 95%;
         margin: 36px auto;
         p { margin: 8px 0px; }
     }

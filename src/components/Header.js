@@ -175,7 +175,7 @@ const Header = () => {
                     <a href={"/mc_server"}>MC服务器</a>
                 </li>
                 <li>
-                    <a target="_blank" href={"/myomyw/index.html"}>Myomyw</a>
+                    <a target="_blank" rel="noopener noreferrer" href={"/myomyw/index.html"}>Myomyw</a>
                 </li>
                 <li>
                     <a href={"/about"}>关于</a>
