@@ -1,9 +1,9 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
-import {API_BASE} from "../Settings";
-import AuthenticatedPage from "../components/AuthenticatedPage";
+import Base from "./Base";
+import {ADMIN_API_BASE} from "./Settings";
 
-class AdminContentPage extends AuthenticatedPage {
+class EditDoc extends Base {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +18,7 @@ class AdminContentPage extends AuthenticatedPage {
     componentDidMount() {
         if(isNaN(this.getPageId())) this.returnToAdminPage();
 
-        fetch(API_BASE + "/doc/id/" + this.getPageId())
+        fetch(ADMIN_API_BASE + "/doc/id/" + this.getPageId())
             .then((response) => {
                 return response.json();
             })
@@ -52,7 +52,7 @@ class AdminContentPage extends AuthenticatedPage {
     }
 
     deleteContent() {
-        fetch(API_BASE + "/doc/id/" + this.getPageId(), {
+        fetch(ADMIN_API_BASE + "/doc/id/" + this.getPageId(), {
             method: 'DELETE',
             headers: this.getRequestHeader(),
         }).then((response) => {
@@ -61,7 +61,7 @@ class AdminContentPage extends AuthenticatedPage {
     }
 
     submitChanges() {
-        fetch(API_BASE + "/doc/id/" + this.getPageId(), {
+        fetch(ADMIN_API_BASE + "/doc/id/" + this.getPageId(), {
             method: 'PUT',
             headers: this.getRequestHeader(),
             body: JSON.stringify(JSON.stringify(JSON.parse(this.state.data)))
@@ -71,4 +71,4 @@ class AdminContentPage extends AuthenticatedPage {
     }
 }
 
-export default withRouter(AdminContentPage);
+export default withRouter(EditDoc);

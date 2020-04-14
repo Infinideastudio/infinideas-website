@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import Link from './Link'
 
 const StyledSection = styled.div`
     padding: 20px;
@@ -48,7 +49,7 @@ const Section = (props) => {
     return (
         <StyledSection>
             <div className="description">{props.description}</div>
-            <div className="link"><a href={props.link}>{props.name}</a></div>
+            <div className="link"><Link hyper={props.primary}/></div>
             {props.children}
         </StyledSection>
     )

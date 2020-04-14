@@ -1,7 +1,7 @@
 import React from 'react';
 import Cookies from "universal-cookie";
 
-class AuthenticatedPage extends React.Component {
+class Base extends React.Component {
     constructor(props) {
         super(props);
         if (new Cookies().get("credential") === undefined)
@@ -20,4 +20,4 @@ class AuthenticatedPage extends React.Component {
     }
 }
 
-export default AuthenticatedPage;
+export default Base;

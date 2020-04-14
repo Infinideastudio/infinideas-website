@@ -1,9 +1,9 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
-import {API_BASE} from "../Settings";
-import AuthenticatedPage from "../components/AuthenticatedPage";
+import Base from "./Base";
+import {ADMIN_API_BASE} from "./Settings";
 
-class AdminPage extends AuthenticatedPage {
+class ListDoc extends Base {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +12,7 @@ class AdminPage extends AuthenticatedPage {
     }
 
     componentDidMount() {
-        fetch(API_BASE + "/doc/list", {
+        fetch(ADMIN_API_BASE + "/doc/list", {
             method: 'get',
             headers: this.getRequestHeader()
         })
@@ -42,4 +42,4 @@ class AdminPage extends AuthenticatedPage {
     }
 }
 
-export default withRouter(AdminPage);
+export default withRouter(ListDoc);

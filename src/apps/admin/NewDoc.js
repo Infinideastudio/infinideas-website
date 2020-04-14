@@ -1,9 +1,9 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
-import {API_BASE} from "../Settings";
-import AuthenticatedPage from "../components/AuthenticatedPage";
+import Base from "./Base";
+import {ADMIN_API_BASE} from "./Settings";
 
-class AdminNewContentPage extends AuthenticatedPage {
+class NewDoc extends Base {
     constructor(props) {
         super(props);
         this.state = {
@@ -35,7 +35,7 @@ class AdminNewContentPage extends AuthenticatedPage {
             alert("The page name can't be empty");
             return;
         }
-        fetch(API_BASE + "/doc/name/" + this.state.pageName.replace("/", "$"), {
+        fetch(ADMIN_API_BASE + "/doc/name/" + this.state.pageName.replace("/", "$"), {
             method: 'POST',
             headers: this.getRequestHeader(),
             body: JSON.stringify(JSON.stringify(JSON.parse(this.state.data)))
@@ -45,4 +45,4 @@ class AdminNewContentPage extends AuthenticatedPage {
     }
 }
 
-export default withRouter(AdminNewContentPage);
+export default withRouter(NewDoc);
