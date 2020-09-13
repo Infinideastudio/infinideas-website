@@ -2,10 +2,9 @@ import React from 'react';
 import Cookies from 'universal-cookie';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import {API_BASE} from "../Settings";
+import {API_BASE} from "./Settings";
 
-
-const LoginPage = ()=> {
+const App = ()=> {
     const cookies = new Cookies();
     const history = useHistory();
     if (cookies.get("credential"))
@@ -48,4 +47,4 @@ const LoginPage = ()=> {
 
 };
 
-export default LoginPage;
+export default App;
