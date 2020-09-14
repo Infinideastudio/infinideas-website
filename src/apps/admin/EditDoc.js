@@ -1,7 +1,49 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
+import AceEditor from "react-ace";
+import styled from "styled-components";
 import Base from "./Base";
 import {ADMIN_API_BASE} from "./Settings";
+import "ace-builds/src-noconflict/mode-json";
+import "ace-builds/src-noconflict/theme-github";
+
+const ContentBox = styled.div`
+    text-align: center;
+    color: #999999;
+    border: 6px solid #fbfbfb;
+    background-color: #ffffff;
+    overflow: hidden;
+    
+    @media screen and (min-width: 1000px) {
+        font-size: 18px;
+        line-height: 48px;
+        width: 70%;
+        margin: 20px auto;
+        p { margin: 16px 0px; }
+    }
+    @media screen and (max-width: 1000px) {
+        font-size: 18px;
+        line-height: 48px;
+        width: 85%;
+        margin: 20px auto;
+        p { margin: 10px 0px; }
+    } 
+    @media screen and (max-width: 800px) {
+        font-size: 16px;
+        line-height: 36px;
+        width: 95%;
+        margin: 20px auto;
+        p { margin: 8px 0px; }
+    }
+`;
+
+const FlatButton = styled.button`
+    padding: 10px;
+    font-size: 18px;
+    border-right: 2px solid #808080;
+    color: #808080;
+    transition: background-color 0.25s;
+`;
 
 class EditDoc extends Base {
     constructor(props) {
@@ -11,12 +53,12 @@ class EditDoc extends Base {
         };
     }
 
-    getPageId(){
+    getPageId() {
         return +this.props.match.params.page;
     }
 
     componentDidMount() {
-        if(isNaN(this.getPageId())) this.returnToAdminPage();
+        if (isNaN(this.getPageId())) this.returnToAdminPage();
 
         fetch(ADMIN_API_BASE + "/doc/id/" + this.getPageId())
             .then((response) => {
@@ -33,17 +75,25 @@ class EditDoc extends Base {
 
     render() {
         return (
-            <div>
-                <textarea style={{"width":"80%","height":"80vh"}}
-                          value={this.state.data}
-                          onChange={(e)=>{this.setState({data: e.target.value})}} />
+            <ContentBox>
+                <AceEditor
+                    mode="json"
+                    theme="github"
+                    value={this.state.data}
+                    style={{"width": "100%", "height": "80vh"}}
+                    onChange={(e) => {
+                        this.setState({data: e.target.value})
+                    }}
+                    name="UNIQUE_ID_OF_DIV"
+                    editorProps={{$blockScrolling: true}}
+                />
                 <p>
-                    <button onClick={this.submitChanges.bind(this)}>Submit</button>
-                    <button onClick={this.deleteContent.bind(this)}>Delete</button>
-                    <button onClick={this.returnToAdminPage.bind(this)}>Cancel</button>
-                    <a href={"/"+this.getPageId()}>Goto that page</a>
+                    <FlatButton onClick={this.submitChanges.bind(this)}>Submit</FlatButton>
+                    <FlatButton onClick={this.deleteContent.bind(this)}>Delete</FlatButton>
+                    <FlatButton onClick={this.returnToAdminPage.bind(this)}>Cancel</FlatButton>
+                    <a href={"/" + this.getPageId()}><FlatButton>Goto that page</FlatButton></a>
                 </p>
-            </div>
+            </ContentBox>
         );
     }
 
