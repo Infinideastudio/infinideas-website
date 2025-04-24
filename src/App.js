@@ -4,8 +4,6 @@ import styled from "styled-components";
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-const LoginApp = lazy(() => import('./apps/login/App'));
-const AdminApp = lazy(() => import('./apps/admin/App'));
 const ViewDocApp = lazy(() => import('./apps/document/App'));
 
 const getBasename = () => {
@@ -22,8 +20,6 @@ class AppMux extends React.Component {
     render() {
         return (
             <Switch>
-                <Route path="/login" component={LoginApp}/>
-                <Route path="/admin" component={AdminApp}/>
                 <Route path="/:page" component={ViewDocApp}/>
                 <Route component={ViewDocApp}/>
             </Switch>
